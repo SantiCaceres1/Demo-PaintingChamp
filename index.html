@@ -178,6 +178,29 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  .hero-badge-svg {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    z-index: 5;
+    width: 140px;
+    height: 140px;
+    animation: spin 20s linear infinite;
+  }
+  .hero-badge-label {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    z-index: 6;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+  }
   section { position: relative; z-index: 1; }
   .section-label {
     font-size: 0.7rem;
@@ -434,14 +457,48 @@
 
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
-    .hero-content { padding: 0 24px 60px; }
-    .services, .works, .cta-section, .why { padding: 60px 24px; }
-    .works-grid { grid-template-columns: 1fr 1fr; }
-    .work-item:first-child { grid-column: span 2; }
-    .stats { grid-template-columns: 1fr; gap: 0; }
-    .why { grid-template-columns: 1fr; gap: 40px; }
+
+    /* ── HERO MOBILE ── */
+    header {
+      min-height: 100svh;
+      justify-content: center;
+      padding-top: 90px;
+      padding-bottom: 48px;
+    }
+    .hero-content {
+      padding: 0 24px;
+      max-width: 100%;
+    }
+    .hero-tag { font-size: 0.65rem; padding: 5px 10px; margin-bottom: 20px; }
+    h1 { font-size: clamp(3.2rem, 16vw, 5rem); line-height: 0.95; }
+    .hero-sub { font-size: 1rem; margin-top: 16px; max-width: 100%; }
+    .hero-actions {
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .btn-primary, .btn-ghost {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 0.9rem;
+    }
+
+    /* Ocultar badge giratorio en mobile */
+    .hero-badge-svg,
+    .hero-badge-label { display: none !important; }
+
+    .services, .works, .cta-section { padding: 60px 24px; }
+    .why { padding: 60px 24px; grid-template-columns: 1fr; gap: 40px; }
     .why-visual { height: 260px; }
-    footer { padding: 24px; }
+
+    .works-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .work-item:first-child { grid-column: span 2; min-height: 220px; }
+    .work-item { aspect-ratio: 4/3; }
+
+    .stats { grid-template-columns: 1fr; gap: 0; padding: 40px 24px; }
+
+    footer { padding: 24px; flex-direction: column; text-align: center; }
   }
 </style>
 </head>
@@ -470,13 +527,13 @@
     </div>
   </div>
 
-  <svg style="position:absolute;right:60px;bottom:80px;z-index:5;width:140px;height:140px;animation:spin 20s linear infinite" viewBox="0 0 140 140">
+  <svg class="hero-badge-svg" viewBox="0 0 140 140">
     <path id="circlePath" d="M70,70 m -50,0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" fill="none"/>
     <text font-family="Bebas Neue, sans-serif" font-size="13" fill="#D0151A" letter-spacing="6">
       <textPath href="#circlePath">CALIDAD GARANTIZADA · PINTURA PROFESIONAL ·</textPath>
     </text>
   </svg>
-  <div style="position:absolute;right:60px;bottom:80px;z-index:6;width:140px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none">
+  <div class="hero-badge-label">
     <span style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--red);line-height:1">★★★</span>
     <span style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:2px">Top Rated</span>
   </div>
@@ -612,7 +669,7 @@
     </ul>
   </div>
   <div class="why-visual">
-    <div class="why-bg-circle"></div> 
+    <div class="why-bg-circle"></div>
     <div class="why-bg-circle"></div>
     <div class="why-bg-circle"></div>
     <div class="why-center-text">
